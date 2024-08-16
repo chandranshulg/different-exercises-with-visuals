@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercise Guide</title>
+    <title>Interactive Exercise Guide</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -20,7 +20,7 @@
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        h1, h2 {
+        h1, h2, h3 {
             text-align: center;
             color: #5A67D8;
         }
@@ -42,40 +42,99 @@
         .exercise p {
             text-align: justify;
         }
+        .interactive-section {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: #5A67D8;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            font-size: 16px;
+        }
+        .button:hover {
+            background-color: #434190;
+        }
+        .results {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #E2E8F0;
+            border-radius: 8px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Exercise Guide</h1>
-        <div class="exercise">
-            <h2>Push-Ups</h2>
-            <img src="pushups.jpg" alt="Push-Ups">
-            <p>Begin in a plank position with your hands slightly wider than shoulder-width apart. Lower your body until your chest nearly touches the floor, then push yourself back up. Keep your core tight and back straight throughout the exercise.</p>
+        <h1>Interactive Exercise Guide</h1>
+
+        <div class="interactive-section">
+            <h3>Where do you want to work out?</h3>
+            <button class="button" onclick="showOptions('home')">At Home</button>
+            <button class="button" onclick="showOptions('gym')">At the Gym</button>
         </div>
 
-        <div class="exercise">
-            <h2>Squats</h2>
-            <img src="squats.jpg" alt="Squats">
-            <p>Stand with your feet shoulder-width apart. Lower your body as if you're sitting back into a chair, keeping your chest up and knees behind your toes. Go as low as you can, then stand back up by driving through your heels.</p>
+        <div id="exercise-options" style="display:none;">
+            <h3>What type of workout do you want to do?</h3>
+            <button class="button" onclick="showExercises('upper-body')">Upper Body</button>
+            <button class="button" onclick="showExercises('lower-body')">Lower Body</button>
         </div>
 
-        <div class="exercise">
-            <h2>Plank</h2>
-            <img src="plank.jpg" alt="Plank">
-            <p>Start in a push-up position but with your weight resting on your forearms instead of your hands. Keep your body in a straight line from head to heels, and hold this position while engaging your core muscles.</p>
-        </div>
+        <div id="exercise-results" class="results"></div>
 
-        <div class="exercise">
-            <h2>Bicep Curls</h2>
-            <img src="bicepcurls.jpg" alt="Bicep Curls">
-            <p>Hold a dumbbell in each hand with your palms facing forward. Keep your elbows close to your torso as you curl the weights while contracting your biceps. Lower the weights back down slowly and repeat.</p>
-        </div>
+        <script>
+            function showOptions(location) {
+                document.getElementById('exercise-options').style.display = 'block';
+                document.getElementById('exercise-results').innerHTML = '';
+            }
 
-        <div class="exercise">
-            <h2>Lunges</h2>
-            <img src="lunges.jpg" alt="Lunges">
-            <p>Stand upright and take a step forward with one leg, lowering your hips until both knees are bent at a 90-degree angle. Ensure your front knee is directly above your ankle and your back knee doesn't touch the floor. Push back up to the starting position and repeat with the other leg.</p>
-        </div>
+            function showExercises(type) {
+                let exercises = '';
+
+                if (type === 'upper-body') {
+                    exercises = `
+                        <h2>Upper Body Exercises</h2>
+                        <div class="exercise">
+                            <h3>Push-Ups (Home/Gym)</h3>
+                            <img src="pushups.jpg" alt="Push-Ups">
+                            <p>Begin in a plank position with your hands slightly wider than shoulder-width apart. Lower your body until your chest nearly touches the floor, then push yourself back up.</p>
+                        </div>
+                        <div class="exercise">
+                            <h3>Bicep Curls (Gym)</h3>
+                            <p>Hold a dumbbell in each hand with your palms facing forward. Keep your elbows close to your torso as you curl the weights while contracting your biceps.</p>
+                            <p><strong>Note:</strong> You can search for 'Bicep Curls' on Google for more details.</p>
+                        </div>
+                        <div class="exercise">
+                            <h3>Plank (Home/Gym)</h3>
+                            <img src="plank.jpg" alt="Plank">
+                            <p>Start in a push-up position but with your weight resting on your forearms instead of your hands. Keep your body in a straight line from head to heels, and hold this position while engaging your core muscles.</p>
+                        </div>`;
+                } else if (type === 'lower-body') {
+                    exercises = `
+                        <h2>Lower Body Exercises</h2>
+                        <div class="exercise">
+                            <h3>Squats (Home/Gym)</h3>
+                            <img src="squats.jpg" alt="Squats">
+                            <p>Stand with your feet shoulder-width apart. Lower your body as if you're sitting back into a chair, keeping your chest up and knees behind your toes.</p>
+                        </div>
+                        <div class="exercise">
+                            <h3>Lunges (Home/Gym)</h3>
+                            <img src="lunges.jpg" alt="Lunges">
+                            <p>Stand upright and take a step forward with one leg, lowering your hips until both knees are bent at a 90-degree angle.</p>
+                        </div>
+                        <div class="exercise">
+                            <h3>Leg Press (Gym)</h3>
+                            <p>Sit on the leg press machine and place your feet on the platform shoulder-width apart. Push the platform away by extending your legs, then slowly bring it back down.</p>
+                            <p><strong>Note:</strong> You can search for 'Leg Press' on Google for more details.</p>
+                        </div>`;
+                }
+
+                document.getElementById('exercise-results').innerHTML = exercises;
+            }
+        </script>
     </div>
 </body>
 </html>
